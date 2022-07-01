@@ -2,15 +2,22 @@ import express, {Application, Request, Response} from 'express';
 import * as superagent from "superagent";
 
 const app: Application = express();
+import cors from 'cors';
 
 const API_URL = process.env.API_URL || 'http://127.0.0.1:51475';
 const PORT = process.env.PORT || 3001;
 
 const router = express.Router();
 
+const allowedOrigins = ['http://localhost:3000', 'https://faucet.divi.domains']
+
+const options: cors.CorsOptions = {
+    origin: allowedOrigins
+};
+
+app.use(cors(options));
+
 router.get('/', (req: Request, res: Response): void => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.status(200).send({
         status: 'OK',
         time: Number(new Date()),
@@ -18,8 +25,6 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.get('/supply', (req: Request, res: Response): void => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         superagent
             .post(`${API_URL}`)
             .set('Content-Type', 'application/json')
@@ -42,8 +47,6 @@ router.get('/supply', (req: Request, res: Response): void => {
 );
 
 router.get('/blocks', (req: Request, res: Response): void => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         superagent
             .post(`${API_URL}`)
             .set('Content-Type', 'application/json')
@@ -66,8 +69,6 @@ router.get('/blocks', (req: Request, res: Response): void => {
 );
 
 router.post('/print', (req: Request, res: Response): void => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         if (req.query.address && req.query.amount) {
             if (req.query.address.length === 0) {
                 res.status(400).send({error: 'Please provide a valid address'});
