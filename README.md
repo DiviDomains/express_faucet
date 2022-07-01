@@ -4,4 +4,7 @@
 npm install
 
 
-PORT=3009 npm start
+PORT=3005 npm start
+
+
+nohup PORT=3005 npm start &
