@@ -5,8 +5,6 @@ const app: Application = express();
 
 const API_URL = process.env.API_URL || 'http://127.0.0.1:51475';
 const PORT = process.env.PORT || 3001;
-const USER = process.env.USER || "divirpc";
-const PASSWORD = process.env.PASSWORD || "changeme";
 
 const router = express.Router();
 
@@ -20,7 +18,6 @@ router.get('/', (req: Request, res: Response): void => {
 router.get('/supply', (req: Request, res: Response): void => {
         superagent
             .post(`${API_URL}`)
-            .auth(USER, PASSWORD)
             .set('Content-Type', 'application/json')
             .send({
                 id: 'faucet',
@@ -43,7 +40,6 @@ router.get('/supply', (req: Request, res: Response): void => {
 router.get('/blocks', (req: Request, res: Response): void => {
         superagent
             .post(`${API_URL}`)
-            .auth(USER, PASSWORD)
             .set('Content-Type', 'application/json')
             .send({
                 id: 'faucet',
@@ -77,7 +73,6 @@ router.post('/print', (req: Request, res: Response): void => {
                 const amount = req.query.amount
                 superagent
                     .post(`${API_URL}`)
-                    .auth(USER, PASSWORD)
                     .set('Content-Type', 'application/json')
                     .send({
                         id: 'faucet',
