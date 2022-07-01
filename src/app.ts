@@ -9,6 +9,8 @@ const PORT = process.env.PORT || 3001;
 const router = express.Router();
 
 router.get('/', (req: Request, res: Response): void => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
     res.status(200).send({
         status: 'OK',
         time: Number(new Date()),
@@ -16,6 +18,8 @@ router.get('/', (req: Request, res: Response): void => {
 });
 
 router.get('/supply', (req: Request, res: Response): void => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         superagent
             .post(`${API_URL}`)
             .set('Content-Type', 'application/json')
@@ -38,6 +42,8 @@ router.get('/supply', (req: Request, res: Response): void => {
 );
 
 router.get('/blocks', (req: Request, res: Response): void => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         superagent
             .post(`${API_URL}`)
             .set('Content-Type', 'application/json')
@@ -60,7 +66,8 @@ router.get('/blocks', (req: Request, res: Response): void => {
 );
 
 router.post('/print', (req: Request, res: Response): void => {
-
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
         if (req.query.address && req.query.amount) {
             if (req.query.address.length === 0) {
                 res.status(400).send({error: 'Please provide a valid address'});
