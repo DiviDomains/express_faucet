@@ -86,7 +86,7 @@ router.get('/print', (req: Request, res: Response): void => {
                         id: 'faucet',
                         jsonrpc: '2.0',
                         method: 'sendtoaddress',
-                        params: [address, amount],
+                        params: [address, +amount],
                     })
                     .end((err, reply) => {
                         if (err) {
