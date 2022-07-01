@@ -68,7 +68,7 @@ router.get('/blocks', (req: Request, res: Response): void => {
     }
 );
 
-router.post('/print', (req: Request, res: Response): void => {
+router.get('/print', (req: Request, res: Response): void => {
         if (req.query.address && req.query.amount) {
             if (req.query.address.length === 0) {
                 res.status(400).send({error: 'Please provide a valid address'});
